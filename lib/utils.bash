@@ -4,7 +4,7 @@ set -euo pipefail
 
 GH_REPO="https://github.com/ankitpokhrel/jira-cli"
 TOOL_NAME="jira-cli"
-TOOL_TEST="jira"
+TOOL_TEST="jira version"
 
 fail() {
   echo -e "asdf-$TOOL_NAME: $*"
@@ -79,7 +79,7 @@ download_release() {
   url="${GH_REPO}/releases/download/v${version}/jira_${version}_${platform}_${arch}.tar.gz"
 
   echo "* Downloading $TOOL_NAME release $version..."
-  curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
+  curl "${curl_opts[@]}" -H 'Cache-Control: no-cache, no-store' -o "$filename" -C - "$url" || fail "Could not download $url"
 }
 
 install_version() {
